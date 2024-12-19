@@ -23,7 +23,7 @@ def predict_image_class(image_data, model, w=128, h=128):
 
 @st.cache_resource
 def load_model():
-    model=tf.keras.models.load_model('model.keras')
+    model=tf.keras.models.load_model('basic_model.keras')
     return model
 
 
@@ -44,7 +44,7 @@ st.write("""
 
 img_file = st.file_uploader("", type=["jpg", "png"])
 
-if 'model.keras' not in os.listdir():
+if 'basic_model.keras' not in os.listdir():
         with st.spinner('Model is being downloaded...'):
                 #basic_model
                 #'1nWuZdpGCJe2h21VHegYP8MEchwKs_ZPW'
