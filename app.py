@@ -15,7 +15,7 @@ def predict_image_class(image_data, model, w=128, h=128):
           img = img[:, :, :3]
         img = np.expand_dims(img, axis=0) # for models expecting a batch
         predictions = []
-        class_names=['no_damage', 'damage']
+        class_names=['No damage', 'Damage']
         
         batch_preds = model.predict(img)
         predictions.extend(batch_preds)
