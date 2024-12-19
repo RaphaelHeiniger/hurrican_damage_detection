@@ -70,7 +70,7 @@ else:
 
   if label == 'Damage':
     st.sidebar.warning(string)
-    st.info("Damage detected")
+    st.warning("Damage detected")
   else:
     st.sidebar.success(string)
-    st.info("No damage detected")
+    st.success("No damage detected")
