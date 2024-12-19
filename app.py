@@ -15,15 +15,15 @@ def predict_image_class(image_data, model, w=128, h=128):
           img = img[:, :, :3]
         img = np.expand_dims(img, axis=0) # for models expecting a batch
         predictions = []
-        test_labels = []
+        class_names=['no_damage', 'damage']
+        
         batch_preds = model.predict(img)
         predictions.extend(batch_preds)
         predictions = np.array(predictions)
         predictions = np.argmax(predictions, axis=1)
         predictions = predictions.ravel()
-        test_labels = np.array(test_labels)     
-        test_labels.extend(labels)
-        return prediction, test_labels
+        st.info(predictions)
+        return prediction, class_name
 
 
 @st.cache_resource
