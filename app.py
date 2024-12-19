@@ -15,6 +15,7 @@ def predict_image_class(image_data, model, w=128, h=128):
           img = img[:, :, :3]
         img = np.expand_dims(img, axis=0) # for models expecting a batch
         prediction = model.predict(img)
+        print(prediction)
         predictions = np.array(predictions)
         predictions = np.argmax(predictions, axis=1)
         predictions = predictions.ravel()
