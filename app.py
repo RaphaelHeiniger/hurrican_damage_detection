@@ -35,7 +35,7 @@ st.set_page_config(
 with st.sidebar:
         #st.image('image_path.png')
         st.title("Damage detection model")
-        st.subheader("The model detects damage due to hurricanes or other catastrophic evens from satellite images.)
+        st.subheader("The model detects damage due to hurricanes or other catastrophic evens from satellite images.")
 
 st.write("""
          The model is trained on damage caused by hurricanes and will show best prediction in this damage scenario."
