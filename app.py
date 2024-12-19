@@ -23,7 +23,7 @@ def predict_image_class(image_data, model, w=128, h=128):
         predictions = np.argmax(predictions, axis=1)
         predictions = predictions.ravel()
         st.info(predictions)
-        return predictions, class_name[predictions[0]]
+        return predictions, class_names[predictions[0]]
 
 
 @st.cache_resource
@@ -65,11 +65,11 @@ if img_file is None:
 else:
   image = Image.open(img_file)
   st.image(image, use_container_width=False)
-  pred, labels = predict_image_class(image, model)
+  pred, label = predict_image_class(image, model)
 
-  string = "Detected class: " + str(pred) + str(labels)
+  string = "Detected class: " + str(label)
 
-  if pred == 'Damage':
+  if label == 'Damage':
     st.sidebar.warning(string)
     st.write("""
     #Damage detected""")
