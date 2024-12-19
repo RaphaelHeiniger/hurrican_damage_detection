@@ -15,6 +15,9 @@ def predict_image_class(image_data, model, w=128, h=128):
           img = img[:, :, :3]
         img = np.expand_dims(img, axis=0) # for models expecting a batch
         prediction = model.predict(img)
+        predictions = np.array(predictions)
+        predictions = np.argmax(predictions, axis=1)
+        predictions = predictions.ravel()
         return prediction
 
 
@@ -32,7 +35,7 @@ st.set_page_config(
 with st.sidebar:
         #st.image('image_path.png')
         st.title("Damage detection model")
-        st.subheader("The model detects damage due to hurricanes or other catastrophic evens.)
+        st.subheader("The model detects damage due to hurricanes or other catastrophic evens from satellite images.)
 
 st.write("""
          The model is trained on damage caused by hurricanes and will show best prediction in this damage scenario."
@@ -53,14 +56,8 @@ else:
   image = Image.open(img_file)
   st.image(image, use_container_width=False)
   predictions = predict_image_class(image, model)
-
-  #### FOR THIS EXAMPLE ONLY
-  preds = tf.keras.applications.imagenet_utils.decode_predictions(predictions, top=5)
-  st.info(preds[0])
-  pred = preds[0][0][1]
-  #################
-
-  string = "Detected class: " + top_pred
+  class_names=['no_damage', 'damage']
+  string = "Detected class: " + str(predictions)
 
   if pred == 'Damage':
     st.sidebar.warning(string)
