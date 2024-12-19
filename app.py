@@ -60,9 +60,9 @@ if img_file is None:
 else:
   image = Image.open(img_file)
   st.image(image, use_container_width=False)
-  predictions = predict_image_class(image, model)
+  pred = predict_image_class(image, model)
   class_names=['no_damage', 'damage']
-  string = "Detected class: " + str(predictions)
+  string = "Detected class: " + str(pred)
 
   if pred == 'Damage':
     st.sidebar.warning(string)
