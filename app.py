@@ -38,7 +38,7 @@ with st.sidebar:
         st.subheader("The model detects damage due to hurricanes or other catastrophic evens from satellite images.")
 
 st.write("""
-         The model is trained on damage caused by hurricanes and will show best prediction in this damage scenario."
+         The model is trained on damage caused by hurricanes and will show best prediction in this damage scenario.
          """
          )
 
