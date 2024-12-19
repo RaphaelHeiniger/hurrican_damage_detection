@@ -14,12 +14,16 @@ def predict_image_class(image_data, model, w=128, h=128):
         #slice off the alpha channel if it exists
           img = img[:, :, :3]
         img = np.expand_dims(img, axis=0) # for models expecting a batch
-        prediction = model.predict(img)
-        st.info(prediction)
-        prediction = np.array(prediction)
-        prediction = np.argmax(prediction, axis=1)
-        prediction = prediction.ravel()
-        return prediction
+        predictions = []
+        test_labels = []
+        batch_preds = model.predict(img)
+        predictions.extend(batch_preds)
+        predictions = np.array(predictions)
+        predictions = np.argmax(predictions, axis=1)
+        predictions = predictions.ravel()
+        test_labels = np.array(test_labels)     
+        test_labels.extend(labels)
+        return prediction, test_labels
 
 
 @st.cache_resource
@@ -61,9 +65,9 @@ if img_file is None:
 else:
   image = Image.open(img_file)
   st.image(image, use_container_width=False)
-  pred = predict_image_class(image, model)
-  class_names=['no_damage', 'damage']
-  string = "Detected class: " + str(pred)
+  pred, labels = predict_image_class(image, model)
+
+  string = "Detected class: " + str(pred) + str(labels)
 
   if pred == 'Damage':
     st.sidebar.warning(string)
