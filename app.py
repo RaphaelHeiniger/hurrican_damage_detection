@@ -23,7 +23,7 @@ def predict_image_class(image_data, model, w=128, h=128):
         predictions = np.argmax(predictions, axis=1)
         predictions = predictions.ravel()
         st.info(predictions)
-        return prediction, class_name
+        return predictions, class_name
 
 
 @st.cache_resource
