@@ -23,7 +23,7 @@ def predict_image_class(image_data, model, w=128, h=128):
 
 @st.cache_resource
 def load_model():
-    model=tf.keras.models.load_model('basic_model.keras')
+    model=tf.keras.models.load_model('fusion_model.keras')
     return model
 
 
@@ -44,14 +44,14 @@ st.write("""
 
 img_file = st.file_uploader("", type=["jpg", "png"])
 
-if 'basic_model.keras' not in os.listdir():
+if 'fusion_model.keras' not in os.listdir():
         with st.spinner('Model is being downloaded...'):
                 #basic_model
                 #'1nWuZdpGCJe2h21VHegYP8MEchwKs_ZPW'
                 #
                 #fusion_model
                 #'1_0d1y29C-lrrQRIM5hyCdIll3-gEncZY'
-                gdown.download(id='1nWuZdpGCJe2h21VHegYP8MEchwKs_ZPW')
+                gdown.download(id='1_0d1y29C-lrrQRIM5hyCdIll3-gEncZY')
 with st.spinner('Model is being loaded...'):
   model=load_model()
 
