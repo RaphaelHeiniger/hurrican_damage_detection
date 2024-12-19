@@ -6,7 +6,7 @@ from PIL import Image, ImageOps
 import numpy as np
 
 
-def predict_image_class(image_data, model, w=224, h=224):
+def predict_image_class(image_data, model, w=128, h=128):
         size = (w,h)
         image = ImageOps.fit(image_data, size, Image.LANCZOS)
         img = np.asarray(image)
@@ -25,18 +25,17 @@ def load_model():
 
 
 st.set_page_config(
-    page_title="Cat Detector",
-    page_icon = ":cat:",
+    page_title="Hurricane damage detection",
     initial_sidebar_state = 'auto'
 )
 
 with st.sidebar:
         #st.image('image_path.png')
-        st.title("Cat Detection Model")
-        st.subheader("Description of what your model is doing.")
+        st.title("Damage detection model")
+        st.subheader("The model detects damage due to hurricanes or other catastrophic evens.)
 
 st.write("""
-         # Cat Detection Tool
+         The model is trained on damage caused by hurricanes and will show best prediction in this damage scenario."
          """
          )
 
@@ -56,19 +55,17 @@ else:
   predictions = predict_image_class(image, model)
 
   #### FOR THIS EXAMPLE ONLY
-  top5_preds = tf.keras.applications.imagenet_utils.decode_predictions(predictions, top=5)
-  st.info(top5_preds[0])
-  top_pred = top5_preds[0][0][1]
+  preds = tf.keras.applications.imagenet_utils.decode_predictions(predictions, top=5)
+  st.info(preds[0])
+  pred = preds[0][0][1]
   #################
 
   string = "Detected class: " + top_pred
 
-  if 'cat' in top_pred.lower() or top_pred.lower() == 'tabby':
-    st.balloons()
-    st.sidebar.success(string)
-    st.write("""
-    # C A T""")
-  else:
+  if pred == 'Damage':
     st.sidebar.warning(string)
-    st.markdown("## Issue detected:")
-    st.info("Not a cat.")
+    st.write("""
+    #Damage detected""")
+  else:
+    st.sidebar.success(string)
+    st.info("No damage detected")
